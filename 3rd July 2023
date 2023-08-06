@@ -1,8 +1,53 @@
 Challemge 1 : https://leetcode.com/problems/find-the-difference-of-two-arrays/
 Solution :-
 
+class Solution {
+public:
+    bool isPresent(int val, vector<int> &nums) {
+        int flag = 0;
+        for(int i=0; i<nums.size(); i++) {
+            if(nums[i] == val) {
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 1)
+            return true;
+        else
+            return false;
+    }
 
+    vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
+        vector<vector<int>> answer(2);
+        for(int i=0; i<nums1.size(); i++) {
+            if(isPresent(nums1[i], nums2) == false && isPresent(nums1[i], answer[0]) == false)
+                answer[0].push_back(nums1[i]);
+        }
+        for(int i=0; i<nums2.size(); i++) {
+            if(isPresent(nums2[i], nums1) == false && isPresent(nums2[i], answer[1]) == false)
+                answer[1].push_back(nums2[i]);
+        }
+        return answer;
+    }
+};
 
 Challenge 2 : https://leetcode.com/problems/product-of-array-except-self/
 Solution :-
 
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> answer(n);
+        vector<int> leftProduct(n), rightProduct(n);
+        leftProduct[0] = 1;
+        for(int i=1; i<n; i++)
+            leftProduct[i] = leftProduct[i-1] * nums[i-1];
+        rightProduct[n - 1] = 1;
+        for(int i=n-2; i>=0; i--)
+            rightProduct[i] = rightProduct[i+1] * nums[i+1];
+        for(int i=0; i<n; i++)
+            answer[i] = leftProduct[i] * rightProduct[i];
+        return answer;
+    }
+};
