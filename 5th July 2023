@@ -1,1 +1,48 @@
+Challenge 1 : https://leetcode.com/problems/trapping-rain-water/
+Solution :- 
 
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        int amountOfWater = 0;
+        int left = 0, right = n-1;
+        int leftMax = 0, rightMax = 0;
+        while(left <= right) {
+            if(height[left] <= height[right]) {
+                if(height[left] >= leftMax)
+                    leftMax = height[left];
+                else
+                    amountOfWater += leftMax - height[left];
+                left++;
+            }
+            else {
+                if(height[right] >= rightMax)
+                    rightMax = height[right];
+                else
+                    amountOfWater += rightMax - height[right];
+                right--;
+            }
+        }
+        return amountOfWater;
+    }
+};
+
+Challenge 2 : https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+Solution :- 
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int minPriceSoFar = prices[0];
+        int maxProfit = 0;
+        for(int i=0; i<prices.size(); i++) {
+            if(prices[i] <= minPriceSoFar)
+                minPriceSoFar = prices[i];
+            int profit = prices[i] - minPriceSoFar;
+            if(profit > maxProfit)
+            maxProfit = profit;
+        }
+        return maxProfit;
+    }
+};
