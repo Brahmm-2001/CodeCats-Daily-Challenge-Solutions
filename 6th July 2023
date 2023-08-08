@@ -1,3 +1,23 @@
 Challenge 1 : https://leetcode.com/problems/median-of-two-sorted-arrays/
 Solution :- 
 
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int m = nums1.size(), n = nums2.size();
+        vector<int> nums3(m+n);
+        int i=0, j=0, k=0;
+        while(i<m && j<n) {
+            if(nums1[i] < nums2[j])
+                nums3[k++] = nums1[i++];
+            else
+                nums3[k++] = nums2[j++];
+        }
+        for( ; i<m; i++)
+            nums3[k++] = nums1[i];
+        for( ; j<n; j++)
+            nums3[k++] = nums2[j];
+        int noe = m + n; //noe - no. of elements 
+        return noe%2?nums3[noe/2]:(nums3[noe/2]+nums3[noe/2-1])/2.0;
+    }
+};
