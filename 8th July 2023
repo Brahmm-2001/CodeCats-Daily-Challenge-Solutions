@@ -1,0 +1,36 @@
+Challenge 1 : https://leetcode.com/problems/rotate-array/
+Solution :-
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        if(k > n) {
+            k = k - n*(k/n);
+        }
+        for(int i=0; i<n-k; i++)
+            nums.push_back(nums[i]);
+        nums.erase(nums.begin(), nums.begin()+(n-k));
+    }
+};
+
+Challenge 2 : https://leetcode.com/problems/intersection-of-multiple-arrays/
+Solution :-
+
+class Solution {
+public:
+    vector<int> intersection(vector<vector<int>>& nums) {
+        int n = nums.size();
+        map<int, int> numsCount;
+        vector<int> answer;
+        for(auto v : nums) {
+            for(int x : v)
+                numsCount[x]++;
+        }
+        for(auto entry : numsCount) {
+            if(entry.second == n)
+                answer.push_back(entry.first);
+        }
+        return answer;
+    }
+};
