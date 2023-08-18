@@ -1,0 +1,37 @@
+Challenge 1 : https://leetcode.com/problems/jewels-and-stones/
+Solution :-
+
+class Solution {
+public:
+    int numJewelsInStones(string jewels, string stones) {
+        int jewelCount = 0;
+        int jLength = jewels.size();
+        unordered_map <char, int> charCount;
+        for(auto s : stones) {
+            charCount[s]++;
+        }
+        for(int i=0; i<jLength; i++) {
+            if(charCount.count(jewels[i]) == 1)
+                jewelCount += charCount[jewels[i]];
+        }
+        return jewelCount;
+    }
+};
+
+Challenge 2 : https://leetcode.com/problems/sort-the-people/
+Solution :- 
+
+class Solution {
+public:
+    vector<string> sortPeople(vector<string>& names, vector<int>& heights) {
+        vector<string> answer;
+        int n = names.size();
+        map <int, string> mp;
+        for(int i=0; i<n; i++)
+            mp[heights[i]] = names[i];
+        map <int, string> :: reverse_iterator itr;
+        for(itr = mp.rbegin(); itr != mp.rend(); itr++)
+            answer.push_back(itr->second);
+        return answer;
+    }
+};
